@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context="com.galaxy.sesion3.MainActivity">
+
+    <TextView
+        android:text="REGISTRO DE USUARIOS"
+        android:textSize="25sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryDark"/>
+
+    <ImageView
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:id="@+id/imageView"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        app:srcCompat="@drawable/facebook" />
+
+    <EditText
+        android:id="@+id/Et_IngresarUsuario"
+        android:hint="INGRESAR USUARIO"
+        android:layout_marginTop="20dp"
+        android:fontFamily="sans-serif"
+        android:maxLines="1"
+        android:textColorHint="@color/colorPrimaryDark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/Et_IngresarPassword"
+        android:hint="INGRESAR PASSWORD"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:fontFamily="sans-serif"
+        android:textColorHint="@color/colorPrimaryDark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/Et_NIngresarPassword"
+        android:hint="REPITA EL PASSWORD"
+        android:fontFamily="sans-serif"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:textColorHint="@color/colorPrimaryDark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/Et_ingresarNombres"
+        android:hint="INGRESAR NOMBRES"
+        android:maxLines="1"
+        android:textColorHint="@color/colorPrimaryDark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/Et_IngresarApellidos"
+        android:hint="INGRESAR APELLIDOS"
+        android:maxLines="1"
+        android:textColorHint="@color/colorPrimaryDark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/Bt_Registrar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorPrimaryDark"
+        android:text="REGISTRAR"
+        android:textColor="@android:color/background_light" />
+
+</LinearLayout>
