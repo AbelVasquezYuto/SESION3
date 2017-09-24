@@ -10,6 +10,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.galaxy.sesion3.dao.UsuariosDAO;
+import com.galaxy.sesion3.model.Usuarios;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -41,6 +44,11 @@ public class MainActivity extends AppCompatActivity {
         }
         Log.v("MainActivity","version sqlite = "+sqliteVersion);
 
+
+        MySQLiteOpenHelper mySQLiteOpenHelper = new MySQLiteOpenHelper(this);
+        UsuariosDAO helper = new UsuariosDAO(mySQLiteOpenHelper);
+
+        Usuarios usuario = new Usuarios();
 
     }
 

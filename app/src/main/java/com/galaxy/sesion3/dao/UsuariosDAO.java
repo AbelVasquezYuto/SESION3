@@ -1,11 +1,14 @@
 package com.galaxy.sesion3.dao;
 
 import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.galaxy.sesion3.MySQLiteOpenHelper;
 import com.galaxy.sesion3.model.Usuarios;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UsuariosDAO {
@@ -13,7 +16,7 @@ public class UsuariosDAO {
     private MySQLiteOpenHelper sqLiteOpenHelper;
     private SQLiteDatabase sqLiteDatabase;
 
-    public UsuariosDAO(MySQLiteOpenHelper sqLiteOpenHelper){
+    public UsuariosDAO(Context context){
         this.sqLiteOpenHelper=sqLiteOpenHelper;
         this.sqLiteDatabase = sqLiteOpenHelper.getWritableDatabase();
     }
@@ -70,8 +73,44 @@ public class UsuariosDAO {
 
     public List<Usuarios> obtenerUsuarios(){
 
-        String[] fields = {};
+        String[] fields = {
+                Usuarios.USUARIO_FIELD,
+                Usuarios.PASSWORD_FIELD,
+                Usuarios.NPASSWORD_FIELD,
+                Usuarios.NOMBRES_FIELD,
+                Usuarios.APELLIDOS_FIELD
+        };
 
-        return null;
+        Cursor cursor = sqLiteDatabase.query(Usuarios.TABLE_NAME,fields,null,null,null,null,null);
+
+        return convertCursorToList(cursor);
     }
+
+    private List<Usuarios> convertCursorToList(Cursor cursor){
+
+        //creando un item de producto vacio
+        List<Usuarios> arrList = new ArrayList<>();
+
+        //recorriendo el cursor
+        if(cursor.moveToFirst()){
+            do{
+                //creando un item de usuario vacio
+                Usuarios model = new Usuarios();
+
+                //añadiendo valor a los campos del item de producto
+                model.setUsuario(cursor.getString(cursor.getColumnIndex(Usuarios.USUARIO_FIELD)));
+                model.setPassword(cursor.getString(cursor.getColumnIndex(Usuarios.PASSWORD_FIELD)));
+                model.setNpassword(cursor.getString(cursor.getColumnIndex(Usuarios.NPASSWORD_FIELD)));
+                model.setNombres(cursor.getString(cursor.getColumnIndex(Usuarios.NOMBRES_FIELD)));
+                model.setApellidos(cursor.getString(cursor.getColumnIndex(Usuarios.APELLIDOS_FIELD)));
+
+                //agregando el item de producto a la coleccion
+                arrList.add(model);
+            }while(cursor.moveToNext());
+        }
+
+        //retornando la coleccion de productos
+        return arrList;
+    }
+
 }
