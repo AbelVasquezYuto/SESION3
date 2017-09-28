@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.galaxy.sesion3.MySQLiteOpenHelper;
-import com.galaxy.sesion3.model.Usuarios;
+import com.galaxy.sesion3.model.UsuariosModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,92 +17,86 @@ public class UsuariosDAO {
     private SQLiteDatabase sqLiteDatabase;
 
     public UsuariosDAO(Context context){
-        this.sqLiteOpenHelper=sqLiteOpenHelper;
+        this.sqLiteOpenHelper=new MySQLiteOpenHelper(context);
         this.sqLiteDatabase = sqLiteOpenHelper.getWritableDatabase();
     }
 
-    public long insertarUsuario(Usuarios usuarios){
+    public long insertarUsuario(UsuariosModel usuariosModel){
 
         ContentValues valoresInsertar = new ContentValues();
-        valoresInsertar.put(Usuarios.USUARIO_FIELD,usuarios.getUsuario());
-        valoresInsertar.put(Usuarios.PASSWORD_FIELD,usuarios.getPassword());
-        valoresInsertar.put(Usuarios.NPASSWORD_FIELD,usuarios.getNpassword());
-        valoresInsertar.put(Usuarios.NOMBRES_FIELD,usuarios.getNombres());
-        valoresInsertar.put(Usuarios.APELLIDOS_FIELD,usuarios.getApellidos());
+        valoresInsertar.put(UsuariosModel.USUARIO_FIELD, usuariosModel.getUsuario());
+        valoresInsertar.put(UsuariosModel.PASSWORD_FIELD, usuariosModel.getPassword());
+        valoresInsertar.put(UsuariosModel.CORREO_FIELD, usuariosModel.getCorreo());
+        valoresInsertar.put(UsuariosModel.NOMBRES_FIELD, usuariosModel.getNombres());
+        valoresInsertar.put(UsuariosModel.APELLIDOS_FIELD, usuariosModel.getApellidos());
 
-        long result = sqLiteDatabase.insert(Usuarios.TABLE_NAME,null,valoresInsertar);
+        long result = sqLiteDatabase.insert(UsuariosModel.TABLE_NAME,null,valoresInsertar);
 
         return result;
     }
 
-    public int actualizarUsuario(Usuarios usuarios){
+    public int actualizarUsuario(UsuariosModel usuariosModel){
 
         ContentValues valores = new ContentValues();
-        valores.put(Usuarios.PASSWORD_FIELD,usuarios.getPassword());
-        valores.put(Usuarios.NPASSWORD_FIELD,usuarios.getNpassword());
-        valores.put(Usuarios.NOMBRES_FIELD,usuarios.getNombres());
-        valores.put(Usuarios.APELLIDOS_FIELD,usuarios.getApellidos());
+        valores.put(UsuariosModel.PASSWORD_FIELD, usuariosModel.getPassword());
+        valores.put(UsuariosModel.CORREO_FIELD, usuariosModel.getCorreo());
+        valores.put(UsuariosModel.NOMBRES_FIELD, usuariosModel.getNombres());
+        valores.put(UsuariosModel.APELLIDOS_FIELD, usuariosModel.getApellidos());
 
-        String whereClause = Usuarios.USUARIO_FIELD+"=?";
-        String [] whereArgs = {usuarios.getUsuario()};
+        String whereClause = UsuariosModel.USUARIO_FIELD+"=?";
+        String [] whereArgs = {usuariosModel.getUsuario()};
 
         //retorna la cantidad de filas actualizadas
         //retorna 0 si no actualizo nada
-        int result = sqLiteDatabase.update(Usuarios.TABLE_NAME,valores,whereClause,whereArgs);
+        int resultado = sqLiteDatabase.update(UsuariosModel.TABLE_NAME,valores,whereClause,whereArgs);
 
-        return result;
+        return resultado;
     }
 
-    public int eliminarUsuario(Usuarios usuarios){
+    public int eliminarUsuario(String usuario){
 
-        ContentValues valoresEliminar = new ContentValues();
-        valoresEliminar.put(Usuarios.PASSWORD_FIELD,usuarios.getPassword());
-        valoresEliminar.put(Usuarios.NPASSWORD_FIELD,usuarios.getNpassword());
-        valoresEliminar.put(Usuarios.NOMBRES_FIELD,usuarios.getNombres());
-        valoresEliminar.put(Usuarios.APELLIDOS_FIELD,usuarios.getApellidos());
+        String whereClause = UsuariosModel.USUARIO_FIELD+"=?";
+        String [] whereArgs = {usuario};
 
-        String whereClause = Usuarios.USUARIO_FIELD+"=?";
-        String [] whereArgs = {usuarios.getUsuario()};
-
-        int result = sqLiteDatabase.delete(Usuarios.TABLE_NAME,whereClause,whereArgs);
+        int result = sqLiteDatabase.delete(UsuariosModel.TABLE_NAME,whereClause,whereArgs);
 
         //retorna la cantidad de filas eliminadas
         //retorna 0 si no elimino nada
         return result;
     }
 
-    public List<Usuarios> obtenerUsuarios(){
+    public List<UsuariosModel> obtenerUsuarios(){
 
         String[] fields = {
-                Usuarios.USUARIO_FIELD,
-                Usuarios.PASSWORD_FIELD,
-                Usuarios.NPASSWORD_FIELD,
-                Usuarios.NOMBRES_FIELD,
-                Usuarios.APELLIDOS_FIELD
+                UsuariosModel.USUARIO_FIELD,
+                UsuariosModel.PASSWORD_FIELD,
+                UsuariosModel.CORREO_FIELD,
+                UsuariosModel.NOMBRES_FIELD,
+                UsuariosModel.APELLIDOS_FIELD
         };
 
-        Cursor cursor = sqLiteDatabase.query(Usuarios.TABLE_NAME,fields,null,null,null,null,null);
+        Cursor cursor = sqLiteDatabase.query(UsuariosModel.TABLE_NAME,fields,null,null,null,null,null);
 
         return convertCursorToList(cursor);
     }
 
-    private List<Usuarios> convertCursorToList(Cursor cursor){
+    private List<UsuariosModel> convertCursorToList(Cursor cursor){
 
         //creando un item de producto vacio
-        List<Usuarios> arrList = new ArrayList<>();
+        List<UsuariosModel> arrList = new ArrayList<>();
 
         //recorriendo el cursor
         if(cursor.moveToFirst()){
             do{
                 //creando un item de usuario vacio
-                Usuarios model = new Usuarios();
+                UsuariosModel model = new UsuariosModel();
 
                 //añadiendo valor a los campos del item de producto
-                model.setUsuario(cursor.getString(cursor.getColumnIndex(Usuarios.USUARIO_FIELD)));
-                model.setPassword(cursor.getString(cursor.getColumnIndex(Usuarios.PASSWORD_FIELD)));
-                model.setNpassword(cursor.getString(cursor.getColumnIndex(Usuarios.NPASSWORD_FIELD)));
-                model.setNombres(cursor.getString(cursor.getColumnIndex(Usuarios.NOMBRES_FIELD)));
-                model.setApellidos(cursor.getString(cursor.getColumnIndex(Usuarios.APELLIDOS_FIELD)));
+                model.setUsuario(cursor.getString(cursor.getColumnIndex(UsuariosModel.USUARIO_FIELD)));
+                model.setPassword(cursor.getString(cursor.getColumnIndex(UsuariosModel.PASSWORD_FIELD)));
+                model.setCorreo(cursor.getString(cursor.getColumnIndex(UsuariosModel.CORREO_FIELD)));
+                model.setNombres(cursor.getString(cursor.getColumnIndex(UsuariosModel.NOMBRES_FIELD)));
+                model.setApellidos(cursor.getString(cursor.getColumnIndex(UsuariosModel.APELLIDOS_FIELD)));
 
                 //agregando el item de producto a la coleccion
                 arrList.add(model);

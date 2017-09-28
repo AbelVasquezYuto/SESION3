@@ -5,29 +5,32 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.galaxy.sesion3.dao.UsuariosDAO;
-import com.galaxy.sesion3.model.Usuarios;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static android.R.attr.version;
-
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.Iv_Facebook) ImageView IvFacebook;
-    @BindView(R.id.Et_IngresarUsuario) EditText EtIngresarUsuario;
-    @BindView(R.id.Et_IngresarPassword) EditText EtIngresarPassword;
-    @BindView(R.id.Et_NIngresarPassword) EditText EtNIngresarPassword;
-    @BindView(R.id.Et_ingresarNombres) EditText EtIngresarNombres;
-    @BindView(R.id.Et_IngresarApellidos) EditText EtIngresarApellidos;
-    @BindView(R.id.Bt_Registrar) Button BtRegistrar;
+    @BindView(R.id.Et_IngresarUsuario)
+    EditText EtIngresarUsuario;
+    @BindView(R.id.Et_IngresarPassword)
+    EditText EtIngresarPassword;
+    @BindView(R.id.Et_IngresarCorreo)
+    EditText EtIngresarCorreo;
+    @BindView(R.id.Et_ingresarNombres)
+    EditText EtIngresarNombres;
+    @BindView(R.id.Et_IngresarApellidos)
+    EditText EtIngresarApellidos;
+    @BindView(R.id.Iv_Imagen)
+    ImageView IvImagen;
+    @BindView(R.id.Bt_Registrar)
+    Button BtRegistrar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,18 +45,19 @@ public class MainActivity extends AppCompatActivity {
         if (cursor.moveToNext()) {
             sqliteVersion = cursor.getString(0);
         }
-        Log.v("MainActivity","version sqlite = "+sqliteVersion);
-
-
-        MySQLiteOpenHelper mySQLiteOpenHelper = new MySQLiteOpenHelper(this);
-        UsuariosDAO helper = new UsuariosDAO(mySQLiteOpenHelper);
-
-        Usuarios usuario = new Usuarios();
+        Log.v("MainActivity", "version sqlite = " + sqliteVersion);
 
     }
 
-    @OnClick(R.id.Bt_Registrar)
-    public void onViewClicked() {
-        Toast.makeText(this,R.string.registro, Toast.LENGTH_SHORT).show();
+    @OnClick({R.id.Iv_Imagen, R.id.Bt_Registrar})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.Iv_Imagen:
+                Toast.makeText(this, "!Registrese Ahora!", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.Bt_Registrar:
+                Toast.makeText(this, "Se resgistro con exito :v", Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
 }

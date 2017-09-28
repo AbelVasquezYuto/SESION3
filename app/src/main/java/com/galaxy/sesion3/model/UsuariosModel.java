@@ -1,17 +1,17 @@
 package com.galaxy.sesion3.model;
 
-public class Usuarios {
+public class UsuariosModel {
 
-    public static final String TABLE_NAME = "usuarios";
+    public static final String TABLE_NAME = "tabla_usuarios";
     public static final String USUARIO_FIELD = "usuario";
     public static final String PASSWORD_FIELD = "password";
-    public static final String NPASSWORD_FIELD = "npassword";
+    public static final String CORREO_FIELD = "correo";
     public static final String NOMBRES_FIELD = "nombre";
     public static final String APELLIDOS_FIELD = "apellido";
 
     private String usuario;
     private String password;
-    private String npassword;
+    private String correo;
     private String nombres;
     private String apellidos;
 
@@ -31,12 +31,12 @@ public class Usuarios {
         this.password = password;
     }
 
-    public String getNpassword() {
-        return npassword;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setNpassword(String npassword) {
-        this.npassword = npassword;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public String getNombres() {
@@ -57,10 +57,10 @@ public class Usuarios {
 
     @Override
     public String toString() {
-        return "Usuarios{" +
+        return "UsuariosModel{" +
                 "usuario='" + usuario + '\'' +
                 ", password='" + password + '\'' +
-                ", npassword='" + npassword + '\'' +
+                ", correo='" + correo + '\'' +
                 ", nombres='" + nombres + '\'' +
                 ", apellidos='" + apellidos + '\'' +
                 '}';

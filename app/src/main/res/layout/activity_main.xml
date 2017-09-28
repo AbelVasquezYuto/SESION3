@@ -4,80 +4,99 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#4a4a4e"
     android:orientation="vertical"
     android:padding="10dp"
     tools:context="com.galaxy.sesion3.MainActivity">
 
     <TextView
-        android:text="REGISTRO DE USUARIOS"
-        android:textSize="25sp"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimaryDark"/>
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="REGISTRO DE USUARIOS"
+        android:textColor="@android:color/background_light"
+        android:textSize="25sp" />
 
     <ImageView
-        android:layout_marginTop="20dp"
+        android:id="@+id/Iv_Imagen"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
         android:layout_gravity="center"
-        android:id="@+id/Iv_Facebook"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/facebook" />
+        android:layout_marginTop="20dp"
+        app:srcCompat="@drawable/ticket" />
 
     <EditText
         android:id="@+id/Et_IngresarUsuario"
-        android:hint="INGRESAR USUARIO"
-        android:layout_marginTop="20dp"
-        android:fontFamily="sans-serif"
-        android:maxLines="1"
-        android:textColorHint="@color/colorPrimaryDark"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="sans-serif"
+        android:hint="INGRESAR USUARIO"
+        android:maxLines="1"
+        android:textColorHint="@android:color/background_light"
+        android:textColor="@android:color/background_light"
+        android:textColorLink="@color/colorPrimaryDark" />
 
     <EditText
+        android:layout_marginTop="5dp"
         android:id="@+id/Et_IngresarPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
         android:hint="INGRESAR PASSWORD"
         android:inputType="textPassword"
         android:maxLines="1"
-        android:fontFamily="sans-serif"
-        android:textColorHint="@color/colorPrimaryDark"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:textColor="@android:color/background_light"
+        android:textColorHint="@android:color/background_light"
+        android:textColorLink="@color/colorPrimaryDark" />
 
     <EditText
-        android:id="@+id/Et_NIngresarPassword"
-        android:hint="REPITA EL PASSWORD"
+        android:layout_marginTop="5dp"
+        android:id="@+id/Et_IngresarCorreo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
-        android:inputType="textPassword"
+        android:hint="INGRESAR EMAIL"
+        android:inputType="textEmailAddress"
         android:maxLines="1"
-        android:textColorHint="@color/colorPrimaryDark"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:textColor="@android:color/background_light"
+        android:textColorHint="@android:color/background_light"
+        android:textColorLink="@color/colorPrimaryDark" />
 
     <EditText
+        android:layout_marginTop="5dp"
         android:id="@+id/Et_ingresarNombres"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
         android:hint="INGRESAR NOMBRES"
         android:maxLines="1"
-        android:textColorHint="@color/colorPrimaryDark"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:textColor="@android:color/background_light"
+        android:textColorHint="@android:color/background_light"
+        android:textColorLink="@color/colorPrimaryDark" />
 
     <EditText
+        android:layout_marginTop="5dp"
         android:id="@+id/Et_IngresarApellidos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
         android:hint="INGRESAR APELLIDOS"
         android:maxLines="1"
-        android:textColorHint="@color/colorPrimaryDark"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:textColor="@android:color/background_light"
+        android:textColorHint="@android:color/background_light"
+        android:textColorLink="@color/colorPrimaryDark" />
 
     <Button
+        android:textSize="20sp"
         android:id="@+id/Bt_Registrar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@color/colorPrimaryDark"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorAccent"
         android:text="REGISTRAR"
-        android:textColor="@android:color/background_light" />
+        android:textColor="@android:color/background_light"
+        />
 
 </LinearLayout>
