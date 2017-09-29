@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ANDROID</string>
-    <string name="registro">Usuario registrado con exito</string>
+    <string name="registro">Registro exitoso</string>
+    <string name="mensaje_imagen">!Registrese Ahora!</string>
 </resources>

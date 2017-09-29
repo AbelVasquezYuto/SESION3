@@ -15,12 +15,12 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
     public static final Integer VERSION_DB = 1;
 
     private static StringBuilder sbCreateTableProductoSQL = new StringBuilder()
-            .append("CREATE TABLE"+ UsuariosModel.TABLE_NAME+"{")
-            .append(UsuariosModel.USUARIO_FIELD+"TEXT PRIMARY KEY, ")
-            .append(UsuariosModel.PASSWORD_FIELD+"TEXT, ")
-            .append(UsuariosModel.CORREO_FIELD+"TEXT, ")
-            .append(UsuariosModel.NOMBRES_FIELD+"TEXT, ")
-            .append(UsuariosModel.APELLIDOS_FIELD+"TEXT } ");
+            .append("CREATE TABLE "+ UsuariosModel.TABLE_NAME+"(")
+            .append(UsuariosModel.USUARIO_FIELD+" TEXT PRIMARY KEY,")
+            .append(UsuariosModel.PASSWORD_FIELD+" TEXT,")
+            .append(UsuariosModel.CORREO_FIELD+" TEXT,")
+            .append(UsuariosModel.NOMBRES_FIELD+" TEXT,")
+            .append(UsuariosModel.APELLIDOS_FIELD+" TEXT) ");
 
     public MySQLiteOpenHelper(Context context) {
         super(context, NOMBRE_DB, null, VERSION_DB);
@@ -30,7 +30,11 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         Log.d(TAG,"onCreate(database)");
         sqLiteDatabase.execSQL(sbCreateTableProductoSQL.toString());
+    }
 
+    @Override
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        super.onDowngrade(db, oldVersion, newVersion);
 
     }
 

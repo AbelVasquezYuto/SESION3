@@ -1,5 +1,6 @@
 package com.galaxy.sesion3;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -11,11 +12,18 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.galaxy.sesion3.dao.UsuariosDAO;
+import com.galaxy.sesion3.model.UsuariosModel;
+
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static  final String TAG = "MainActivity";
 
     @BindView(R.id.Et_IngresarUsuario)
     EditText EtIngresarUsuario;
@@ -32,11 +40,15 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.Bt_Registrar)
     Button BtRegistrar;
 
+    private UsuariosDAO usuariosDAO;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        usuariosDAO = new UsuariosDAO(this);
 
         String query = "select sqlite_version() AS sqlite_version";
         SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(":memory:", null);
@@ -53,10 +65,38 @@ public class MainActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.Iv_Imagen:
-                Toast.makeText(this, "!Registrese Ahora!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,R.string.mensaje_imagen, Toast.LENGTH_SHORT).show();
                 break;
             case R.id.Bt_Registrar:
-                Toast.makeText(this, "Se resgistro con exito :v", Toast.LENGTH_SHORT).show();
+
+                String usuario = EtIngresarUsuario.getText().toString();
+                String password = EtIngresarPassword.getText().toString();
+                String correo = EtIngresarCorreo.getText().toString();
+                String nombre = EtIngresarNombres.getText().toString();
+                String apellidos = EtIngresarApellidos.getText().toString();
+
+                UsuariosModel usuariosModel = new UsuariosModel();
+
+                usuariosModel.setUsuario(usuario);
+                usuariosModel.setPassword(password);
+                usuariosModel.setCorreo(correo);
+                usuariosModel.setNombres(nombre);
+                usuariosModel.setApellidos(apellidos);
+
+                long result = usuariosDAO.insertarUsuario(usuariosModel);
+
+                if (result!=-1){
+                    Toast.makeText(this,R.string.registro, Toast.LENGTH_SHORT).show();
+                    List<UsuariosModel> usuariosModels = usuariosDAO.obtenerUsuarios();
+                    for (UsuariosModel e:usuariosModels){
+                        Log.i(TAG,e.toString());
+                    }
+
+                    Intent intent = new Intent(MainActivity.this,listaUsuarios.class);
+                    startActivity(intent);
+                }
+                else
+                    Toast.makeText(this, "Ocurrió un problema al registrar", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
